@@ -56,8 +56,8 @@ section {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 6vw;
-  mix-blend-mode: difference;
-  color: #fff;
+  color: #f1ece4;
+  background: linear-gradient(rgba(13,27,36,.7), transparent); /* keeps the logo readable on light sections */
 }
 .logo {
   font-size: 1.5rem;
@@ -137,13 +137,19 @@ button:focus-visible {
   position: absolute;
   inset: 0;
   background: #2b3a44 center/cover;
-  filter: brightness(.55);
 }
 .hero h1 {
   position: relative;
   font-size: clamp(3rem,9vw,8rem);
   line-height: 1.05;
 }
+.hero-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .45); /* dark layer on the hero image, lighter than using filter */
+}
+
 .mask {
   display: inline-block;
   overflow: hidden;
