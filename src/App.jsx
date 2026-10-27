@@ -2,9 +2,10 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
+ScrollTrigger.config({ ignoreMobileResize: true }) // phone address bar hide/show should not refresh the animations
 
 // image links. to use our own images, keep them in the public folder and write '/name.jpg'
-const u = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=80`
+const u = (id) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1200&q=70`
 const P = {
   hero: u('photo-1486718448742-163732cd1544'),
   tower: u('photo-1486406146926-c627a92ad1ab'),
@@ -44,7 +45,7 @@ export default function App() {
 
       // pin = section stays fixed on screen while we scroll, scrub = animation follows the scroll
       const pin = (trigger, end) => gsap.timeline({
-        scrollTrigger: { trigger, start: 'top top', end, pin: true, scrub: 1 },
+        scrollTrigger: { trigger, start: 'top top', end, pin: true, scrub: 0.5 },
       })
       // empty pause in the timeline, so the page waits a little before the next animation
       const hold = (d) => ({ duration: d })
@@ -132,7 +133,7 @@ export default function App() {
           ))}
         </ul>
         <div className="menu-img">
-          {P.menu.map((s, i) => <img key={i} src={s} alt="" className={i === hover ? 'on' : ''} />)}
+          {P.menu.map((s, i) => <img key={i} src={s} alt="" loading="lazy" decoding="async" className={i === hover ? 'on' : ''} />)}
         </div>
       </nav>
 
@@ -170,7 +171,7 @@ export default function App() {
 
       <section className="projects">
         <div className="frame">
-          {P.projects.map((s, i) => <img key={i} className={'s' + (i + 1)} src={s} alt={'Project ' + (i + 1)} />)}
+          {P.projects.map((s, i) => <img key={i} className={'s' + (i + 1)} src={s} alt={'Project ' + (i + 1)} loading="lazy" decoding="async" />)}
         </div>
         <div className="project-info">
           <span className="count">01</span>
